@@ -1,0 +1,47 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+}
+
+<div class="jumbotron">
+    <h1>Jordan Hall</h1>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="frstnme">First name</label>
+            <input type="text" class="form-control" id="frstnme">
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="lastnme">Last name</label>
+            <input type="text" class="form-control" id="lastnme">
+        </div>
+        <button class="btn btn-primary" id="save">Save</button>
+    </div>
+    <textarea class="form-group" id="textArea"></textarea>
+
+</div>
+
+<script type="text/javascript">
+    $("#save").click(function(){
+        var frstNme = $("#frstnme").val();
+        var lstNme = $("#lastnme").val();
+        $("#textArea").text(frstNme + " " + lstNme);
+
+        $.ajax({
+            url: "@Url.Action("Save")",
+            data: JSON.stringify({ firstName: frstNme, lastName: lstNme }),
+            method: 'POST',
+            traditional: true,
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+            },
+            error: function (data) {
+            }
+        });
+    })
+</script>
